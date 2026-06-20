@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfyMeet - Premium Video Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-indigo-600 selection:text-white">
+
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-100/50 via-slate-100/20 to-transparent -z-10 pointer-events-none">
+    </div>
+
+    <!-- Header Block -->
+    <header
+        class="w-full max-w-7xl mx-auto px-8 py-6 flex justify-between items-center border-b border-slate-200/50 bg-white/40 backdrop-blur-md">
+        <div class="flex items-center gap-3 group cursor-pointer">
+            <div
+                class="h-10 w-10 rounded-xl bg-gradient-to-tr from-[#5A4FF3] to-indigo-500 flex items-center justify-center shadow-md shadow-indigo-600/20">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" class="opacity-40" />
+                    <path
+                        d="M7 14.5c-2.5 0-4.5-1.5-4.5-3.5s2-3.5 4.5-3.5c2 0 3.5 1 4.5 2.5 1-1.5 2.5-2.5 4.5-2.5 2.5 0 4.5 1.5 4.5 3.5s-2 3.5-4.5 3.5c-2 0-3.5-1-4.5-2.5-1 1.5-2.5 2.5-4.5 2.5z" />
+                    <circle cx="12" cy="11" r="1" fill="currentColor" />
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">InfyMeet</span>
+                <span class="text-[10px] text-[#5A4FF3] font-bold tracking-widest uppercase mt-0.5">Enterprise</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div class=" flex items-center justify-center">
+                <img src="https://infinityassurance.com/wp-content/uploads/2022/02/infinity-logo-164.png"
+                    alt="Infinity Assurance Logo" class="h-7 w-auto object-contain">
+            </div>
+            <button class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Sign In</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Area -->
+    <main class="max-w-7xl w-full mx-auto px-8 py-8 flex-grow flex flex-col items-center justify-center gap-8">
+        <div class="text-center space-y-3 max-w-2xl">
+            <h1 class="text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                Video meetings, re-imagined for simplicity.
+            </h1>
+        </div>
+
+        <div
+            class="w-full max-w-5xl bg-white rounded-3xl border border-slate-200/60 shadow-[0_20px_50px_rgba(15,23,42,0.04)] overflow-hidden relative p-4 sm:p-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+
+                <!-- Left Action Form Box (Clean layout, no empty floating whitespace) -->
+                <div class="md:col-span-5 flex flex-col justify-start space-y-6 p-2">
+
+                    <div class="bg-slate-100/80 p-1 rounded-xl flex text-xs font-bold text-slate-500">
+                        <button class="flex-1 bg-white text-slate-900 shadow-sm py-2 rounded-lg">New Video Call</button>
+                        <button class="flex-1 hover:text-slate-900 py-2 rounded-lg transition-colors">Join Video
+                            Call</button>
+                    </div>
+
+                    <!-- STATE 1: Name Setup Entry (as formatted in image_64ca5d.png) -->
+                    <div id="setupState" class="space-y-5">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold tracking-wider text-slate-400 uppercase">Your
+                                Name</label>
+                            <div class="relative">
+                                <input type="text" id="userNameInput" placeholder="Enter display name..."
+                                    class="w-full pl-4 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#5A4FF3] focus:bg-white transition-all font-medium text-sm text-slate-900" />
+                                <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5"></i>
+                            </div>
+                        </div>
+                        <button onclick="createMeetingRoom()"
+                            class="w-full bg-[#5A4FF3] hover:bg-[#493ee0] text-white font-semibold text-sm py-3.5 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                            <span>Create Video Meeting</span>
+                            <i data-lucide="video" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- STATE 2: Link Summary Options Dashboard -->
+                    <div id="shareState" class="space-y-4 hidden">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold tracking-wider text-slate-400 uppercase">Your
+                                Name</label>
+                            <div class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl font-medium text-sm text-slate-700 select-none"
+                                id="lockedNameDisplay">
+                                mohit
+                            </div>
+                        </div>
+
+                        <div class="relative flex py-1 items-center">
+                            <div class="flex-grow border-t border-slate-200"></div>
+                            <span class="flex-shrink mx-4 text-xs font-medium text-slate-400">Share this link</span>
+                            <div class="flex-grow border-t border-slate-200"></div>
+                        </div>
+
+                        <div
+                            class="w-full px-3 py-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-2 text-xs">
+                            <span
+                                class="text-slate-500 font-medium tracking-tight truncate max-w-[200px]">http://localhost:3000/?roomId=efa47d9b-4ecb-46...</span>
+                            <div class="flex items-center gap-3 shrink-0 font-bold">
+                                <button onclick="copyLinkText()"
+                                    class="text-[#5A4FF3] hover:text-indigo-700 font-bold px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-all duration-150">
+                                    Copy
+                                </button>
+                                <button onclick="showContactCardState()"
+                                    class="text-[#5A4FF3] hover:text-indigo-700 font-bold px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-all duration-150">
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+
+                        <button onclick="window.open('http://localhost:3000/?roomId=efa47d9b', '_blank')"
+                            class="w-full bg-blue-50 border border-blue-100 text-blue-600 font-semibold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-100/60 transition-colors">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Open on another screen / tab to test</span>
+                        </button>
+
+                        <!-- Standardized to Blue Theme from image_64cd09.png -->
+                        <button
+                            class="w-full bg-[#5A4FF3] hover:bg-[#493ee0] text-white font-bold text-sm py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                            <i data-lucide="video" class="w-4 h-4"></i>
+                            <span>Join This Meeting</span>
+                        </button>
+                    </div>
+
+                    <!-- STATE 3: Embedded Sharing Layout -->
+                    <div id="contactShareState" class="space-y-4 hidden flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between pb-3 border-b border-slate-100">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="p-2 bg-blue-50 rounded-xl text-blue-600">
+                                        <i data-lucide="send" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-sm text-slate-900">Share meeting link</h3>
+                                        <p class="text-[11px] text-slate-400 font-medium">Choose recipients for this
+                                            invitation</p>
+                                    </div>
+                                </div>
+                                <button onclick="backToShareState()" class="text-slate-400 hover:text-slate-600 p-1">
+                                    <i data-lucide="x" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <div class="flex items-center gap-3 py-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-bold text-sm flex items-center justify-center">
+                                    P</div>
+                                <div>
+                                    <h4 class="font-bold text-xs text-slate-800">Pramila Devi</h4>
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-blue-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded mt-0.5 tracking-wide">
+                                        📇 032026/177202
+                                    </span>
+                                </div>
+                            </div>
+
+                            <span
+                                class="text-[10px] font-bold tracking-wider text-slate-400 uppercase block mb-2">Customer
+                                Contacts</span>
+
+                            <div class="space-y-2 max-h-[140px] overflow-y-auto pr-1 custom-scrollbar">
+                                <label
+                                    class="flex items-center justify-between p-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" onchange="validateRecipients()"
+                                            class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+                                        <div class="p-1.5 bg-slate-100 rounded-lg text-slate-500"><i data-lucide="mail"
+                                                class="w-3.5 h-3.5"></i></div>
+                                        <div class="text-left">
+                                            <p class="text-xs font-bold text-slate-800 leading-none">Primary email</p>
+                                            <p class="text-[10px] text-slate-400 font-medium mt-0.5">
+                                                cintunmarik@gmail.com</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="text-[10px] bg-blue-600 text-white font-extrabold px-2 py-0.5 rounded-full">Email</span>
+                                </label>
+
+                                <label
+                                    class="flex items-center justify-between p-2.5 border border-slate-200 rounded-xl opacity-60 bg-slate-50/50 cursor-not-allowed">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" disabled
+                                            class="w-4 h-4 rounded text-blue-600 border-slate-300">
+                                        <div class="p-1.5 bg-slate-100 rounded-lg text-slate-400"><i data-lucide="mail"
+                                                class="w-3.5 h-3.5"></i></div>
+                                        <div class="text-left">
+                                            <p class="text-xs font-bold text-slate-500 leading-none">Alternate email</p>
+                                            <p class="text-[10px] text-slate-400 font-medium mt-0.5">N/A</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="text-[10px] bg-slate-500 text-white font-extrabold px-2 py-0.5 rounded-full">Email</span>
+                                </label>
+
+                                <label
+                                    class="flex items-center justify-between p-2.5 border border-slate-200 rounded-xl hover:bg-slate-50 cursor-pointer transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" onchange="validateRecipients()"
+                                            class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300">
+                                        <div class="p-1.5 bg-slate-100 rounded-lg text-slate-500"><i data-lucide="phone"
+                                                class="w-3.5 h-3.5"></i></div>
+                                        <div class="text-left">
+                                            <p class="text-xs font-bold text-slate-800 leading-none">Mobile number</p>
+                                            <p class="text-[10px] text-slate-400 font-medium mt-0.5">6202995978</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="text-[10px] bg-emerald-600 text-white font-extrabold px-2 py-0.5 rounded-full">SMS</span>
+                                </label>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold tracking-wider text-slate-400 uppercase">External
+                                        Recipients</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="extEmail" oninput="validateRecipients()"
+                                        placeholder="name@domain.com"
+                                        class="px-3 py-2 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500" />
+                                    <input type="text" id="extPhone" oninput="validateRecipients()"
+                                        placeholder="9876543210"
+                                        class="px-3 py-2 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs mt-3">
+                            <span id="recipientStatus" class="text-slate-400 font-medium">No valid recipients</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="backToShareState()"
+                                    class="px-4 py-2 border border-slate-200 rounded-xl font-bold text-slate-600 hover:bg-slate-50">Cancel</button>
+                                <button id="sendLinkBtn" disabled
+                                    class="px-4 py-2 bg-blue-400 text-white font-bold rounded-xl cursor-not-allowed flex items-center gap-1">
+                                    <i data-lucide="send" class="w-3 h-3"></i> Send link
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instant Workspace Ecosystem Integrations Group (Always anchored at bottom) -->
+
+                </div>
+
+                <!-- Right Video Preview Box Canvas Area (Fills space evenly alongside left column) -->
+                <div
+                    class="md:col-span-7 aspect-video md:aspect-auto md:min-h-[440px] bg-slate-950 rounded-2xl relative overflow-hidden shadow-inner flex flex-col justify-between p-4">
+                    <div
+                        class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-30">
+                    </div>
+                    <div class="flex justify-between items-center z-10">
+                        <span
+                            class="text-[10px] font-bold tracking-widest uppercase bg-white/10 text-white/90 px-2 py-1 rounded-md backdrop-blur-md border border-white/10">Preview
+                            Active</span>
+                        <div
+                            class="flex items-center gap-1.5 bg-black/40 text-white px-2 py-1 rounded-md backdrop-blur-md border border-white/5 text-[11px] font-medium">
+                            <i data-lucide="shield" class="w-3 h-3 text-indigo-400"></i> Secure
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#5A4FF3]/20 to-[#5A4FF3]/40 border border-indigo-500/30 flex items-center justify-center text-white font-bold text-xl shadow-2xl">
+                            You</div>
+                    </div>
+                    <div
+                        class="mx-auto bg-slate-900/90 border border-white/10 backdrop-blur-xl px-4 py-2 rounded-xl flex items-center gap-3 shadow-xl z-10">
+                        <button
+                            class="w-7 h-7 rounded-lg hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white"><i
+                                data-lucide="mic" class="w-4 h-4"></i></button>
+                        <button
+                            class="w-7 h-7 rounded-lg hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white"><i
+                                data-lucide="video" class="w-4 h-4"></i></button>
+                        <button
+                            class="w-7 h-7 rounded-lg hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white"><i
+                                data-lucide="monitor" class="w-4 h-4"></i></button>
+                        <div class="w-[1px] h-4 bg-slate-800"></div>
+                        <button
+                            class="w-7 h-7 rounded-lg bg-rose-500/20 hover:bg-rose-500 flex items-center justify-center text-rose-400 hover:text-white"><i
+                                data-lucide="phone" class="w-4 h-4 rotate-[135deg]"></i></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Block (5 Columns matching design layout specs) -->
+    <footer class="w-full max-w-7xl mx-auto px-8 pb-10 pt-4">
+        <div class="border-t border-slate-200/70 pt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-8 gap-x-6">
+            <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-slate-100 text-slate-700 shrink-0"><i data-lucide="video"
+                        class="w-4 h-4"></i></div>
+                <div class="space-y-0.5">
+                    <h4 class="text-slate-900 font-bold text-sm leading-tight">1080p HD Video</h4>
+                    <p class="text-[11px] text-slate-400 font-medium leading-normal">Crystal clear quality</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-slate-100 text-slate-700 shrink-0"><i data-lucide="lock"
+                        class="w-4 h-4"></i></div>
+                <div class="space-y-0.5">
+                    <h4 class="text-slate-900 font-bold text-sm leading-tight">E2E Encrypted</h4>
+                    <p class="text-[11px] text-slate-400 font-medium leading-normal">Private & secure</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-slate-100 text-slate-700 shrink-0"><i data-lucide="globe"
+                        class="w-4 h-4"></i></div>
+                <div class="space-y-0.5">
+                    <h4 class="text-slate-900 font-bold text-sm leading-tight">No Download</h4>
+                    <p class="text-[11px] text-slate-400 font-medium leading-normal">Works in any browser</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <div class="p-2.5 rounded-xl bg-slate-100 text-slate-700 shrink-0"><i data-lucide="headphones"
+                        class="w-4 h-4"></i></div>
+                <div class="space-y-0.5">
+                    <h4 class="text-slate-900 font-bold text-sm leading-tight">Audio Calls</h4>
+                    <p class="text-[11px] text-slate-400 font-medium leading-normal">No camera needed</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3 col-span-2 sm:col-span-1">
+                <div class="p-2.5 rounded-xl bg-slate-100 text-slate-700 shrink-0"><i data-lucide="message-square"
+                        class="w-4 h-4"></i></div>
+                <div class="space-y-0.5">
+                    <h4 class="text-slate-900 font-bold text-sm leading-tight">Live Chat</h4>
+                    <p class="text-[11px] text-slate-400 font-medium leading-normal">Instant messaging</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function createMeetingRoom() {
+            const inputVal = document.getElementById('userNameInput').value.trim();
+            document.getElementById('lockedNameDisplay').innerText = inputVal || "mohit";
+            document.getElementById('setupState').classList.add('hidden');
+            document.getElementById('shareState').classList.remove('hidden');
+        }
+
+        function showContactCardState() {
+            document.getElementById('shareState').classList.add('hidden');
+            document.getElementById('contactShareState').classList.remove('hidden');
+            document.getElementById('contactShareState').classList.add('flex');
+            validateRecipients();
+        }
+
+        function backToShareState() {
+            document.getElementById('contactShareState').classList.add('hidden');
+            document.getElementById('contactShareState').classList.remove('flex');
+            document.getElementById('shareState').classList.remove('hidden');
+        }
+
+        function copyLinkText() {
+            navigator.clipboard.writeText("http://localhost:3000/?roomId=efa47d9b-4ecb-46cb-8cfd-1481b47ff0ad");
+            alert("Meeting link copied to clipboard!");
+        }
+
+        function validateRecipients() {
+            const checkboxes = document.querySelectorAll('#contactShareState input[type="checkbox"]:checked');
+            const extEmail = document.getElementById('extEmail').value.trim();
+            const extPhone = document.getElementById('extPhone').value.trim();
+
+            const hasChecked = checkboxes.length > 0;
+            const hasExternal = extEmail.includes('@') || extPhone.length >= 8;
+
+            const sendBtn = document.getElementById('sendLinkBtn');
+            const statusText = document.getElementById('recipientStatus');
+
+            if (hasChecked || hasExternal) {
+                sendBtn.disabled = false;
+                sendBtn.classList.remove('bg-blue-400', 'cursor-not-allowed');
+                sendBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                statusText.innerText = "Recipients ready";
+                statusText.classList.remove('text-slate-400');
+                statusText.classList.add('text-emerald-600', 'font-bold');
+            } else {
+                sendBtn.disabled = true;
+                sendBtn.classList.add('bg-blue-400', 'cursor-not-allowed');
+                sendBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                statusText.innerText = "No valid recipients";
+                statusText.classList.remove('text-emerald-600', 'font-bold');
+                statusText.classList.add('text-slate-400');
+            }
+        }
+    </script>
+</body>
+
+</html>

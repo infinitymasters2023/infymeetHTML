@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfyMeet — Infinite Connections, Zero Friction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f7ff',
+                            100: '#ebf0ff',
+                            500: '#4f46e5', 
+                            600: '#4338ca',
+                            950: '#1e1b4b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col overflow-x-hidden relative">
+
+    <div class="absolute inset-0 z-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-70 pointer-events-none">
+    </div>
+
+    <div class="absolute top-0 left-[-10%] w-[600px] h-[600px] bg-indigo-200/40 rounded-full blur-[120px] pointer-events-none">
+    </div>
+    <div class="absolute top-[30%] right-[-10%] w-[500px] h-[500px] bg-sky-200/50 rounded-full blur-[100px] pointer-events-none">
+    </div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-2">
+                    <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-500 to-sky-400 flex items-center justify-center shadow-md shadow-brand-500/20">
+                        <i data-lucide="video" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900">Infy<span class="text-brand-500">Meet</span></span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#hero" class="text-sm font-medium text-slate-600 hover:text-brand-500 transition-colors">Home</a>
+                    <a href="#features" class="text-sm font-medium text-slate-600 hover:text-brand-500 transition-colors">Features</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-4">
+                    <button class="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Sign In</button>
+                    <a href="#hero" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl transition-all shadow-md shadow-brand-500/10">Host Free Call</a>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="flex-1 relative z-10 flex items-center justify-center pt-24 pb-12">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
+
+                <!-- LEFT BLOCK: INITIAL CONTROL PANEL -->
+                <div class="lg:col-span-6 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-50 text-brand-600 border border-indigo-100 mb-6">
+                        <span class="w-2 h-2 bg-indigo-600 rounded-full animate-pulse"></span>
+                        WebRTC 4K Node Active
+                    </span>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6">
+                        Crystal Clear Video.<br>
+                        <span class="bg-gradient-to-r from-brand-500 to-sky-500 bg-clip-text text-transparent">Zero Friction.</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                        No installation files. No mandatory logins. Open private, secure enterprise-grade video call rooms immediately inside your web browser app.
+                    </p>
+
+                    <!-- Left Card UI Interface Container -->
+                    <div id="leftInterfacePanel" class="bg-white border border-slate-200/80 p-5 rounded-3xl mx-auto lg:mx-0 shadow-2xl shadow-slate-200/50 flex flex-col justify-start w-full">
+                        <!-- FLOW STATE 1: SETUP -->
+                        <div id="setupState" class="space-y-5 w-full">
+                            <div class="bg-slate-50 p-1 rounded-xl flex text-xs font-bold text-slate-400 border border-slate-200/60 w-full">
+                                <button id="tabNewCall" class="flex-1 bg-white text-slate-900 border border-slate-200/80 shadow-sm py-2 rounded-lg transition-all flex items-center justify-center gap-1.5">
+                                    <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>New Video Call
+                                </button>
+                                <button id="tabJoinCall" class="flex-1 hover:text-slate-700 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                                    <i data-lucide="log-in" class="w-3.5 h-3.5"></i>Join Video Call
+                                </button>
+                            </div>
+
+                            <div class="space-y-2 text-left w-full">
+                                <label id="inputLabel" class="block text-[10px] font-bold tracking-widest text-slate-400 uppercase">Your Name</label>
+                                <div class="flex flex-col sm:flex-row gap-2.5 items-stretch w-full">
+                                    <div class="relative flex-1">
+                                        <input type="text" id="userNameInput" placeholder="Enter your display name..." class="w-full h-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#6366F1] focus:ring-4 focus:ring-indigo-500/5 transition-all font-medium text-xs text-slate-800 placeholder-slate-400 min-h-[46px]" />
+                                        <i id="inputIcon" data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-4 top-[15px]"></i>
+                                    </div>
+                                    <button id="primaryActionBtn" class="sm:w-auto bg-gradient-to-r from-[#6366F1] to-[#4F46E5] hover:from-[#4F46E5] hover:to-[#4338CA] text-white font-bold text-xs py-3.5 px-5 rounded-xl shadow-lg shadow-indigo-600/10 transition-all transform active:scale-[0.99] flex items-center justify-center gap-2 shrink-0 min-h-[46px]">
+                                        <span id="primaryActionText">Create Video Meeting</span>
+                                        <i data-lucide="video" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Left side alternative dynamic card text description displayed when active -->
+                        <div id="leftSuccessMessage" class="hidden space-y-3 text-left">
+                            <div class="p-3 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-start gap-3">
+                                <i data-lucide="info" class="w-5 h-5 text-indigo-600 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <h4 class="font-bold text-xs text-indigo-950">Room Initialized</h4>
+                                    <p class="text-[11px] text-slate-600 leading-relaxed mt-0.5">Your interactive WebRTC room configurations have been deployed on the active network node. Complete execution steps using the parameters displayed on the right management side.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT BLOCK: PREVIEW AND ACTIVE MANAGEMENT CARDS SECTION -->
+                <div class="lg:col-span-6">
+                    
+                    <!-- 1. The Pre-meeting Video Preview Card Container (image_48b581.png layout) -->
+                    <div id="previewCardSection" class="relative rounded-2xl overflow-hidden glass-panel p-3.5 shadow-2xl shadow-slate-300/40">
+                        <div class="flex items-center justify-between px-2 pb-3.5 border-b border-slate-200/60 mb-3.5">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-300/40"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-300/40"></span>
+                                <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-300/40"></span>
+                            </div>
+                            <span id="previewRoomUrl" class="text-xs font-mono text-slate-400 tracking-wide">infymeet.live/room-alpha</span>
+                            <div class="w-8"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 min-h-[240px] sm:min-h-[320px]">
+                            <div class="relative rounded-xl bg-gradient-to-b from-slate-100 to-slate-200/60 overflow-hidden flex items-center justify-center border border-slate-200 shadow-inner group">
+                                <div class="text-center">
+                                    <div class="w-14 h-14 rounded-full bg-white text-brand-500 flex items-center justify-center text-lg font-bold mx-auto mb-2 shadow-sm border border-slate-200">MK</div>
+                                    <span class="text-xs font-semibold text-slate-600">Maxine K. (You)</span>
+                                </div>
+                                <span class="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-white/90 text-[10px] text-slate-600 font-medium tracking-wide shadow-sm border border-slate-100">1080p Ultra</span>
+                            </div>
+
+                            <div class="relative rounded-xl bg-gradient-to-b from-slate-100 to-slate-200/60 overflow-hidden flex items-center justify-center border border-slate-200 shadow-inner">
+                                <div class="text-center">
+                                    <div class="w-14 h-14 rounded-full bg-brand-500 text-white flex items-center justify-center text-lg font-bold mx-auto mb-2 shadow-md">TH</div>
+                                    <span class="text-xs font-semibold text-slate-600">Tom Harris</span>
+                                </div>
+                                <span class="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-amber-50 text-[10px] text-amber-700 font-semibold tracking-wide border border-amber-200/60 flex items-center gap-1">
+                                    <i data-lucide="mic-off" class="w-3 h-3 text-amber-600"></i>
+                                    Audio Muted
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-center gap-3 mt-4 pt-3.5 border-t border-slate-200/60">
+                            <button class="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-all border border-slate-200/60 min-h-[44px]">
+                                <i data-lucide="mic" class="w-5 h-5"></i>
+                            </button>
+                            <button class="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-all border border-slate-200/60 min-h-[44px]">
+                                <i data-lucide="video" class="w-5 h-5"></i>
+                            </button>
+                            <button class="p-3 rounded-xl bg-red-500 hover:bg-red-600 text-white transition-all shadow-md shadow-red-500/20 min-h-[44px]">
+                                <i data-lucide="phone-off" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. The Right Hand Dynamic Management Control Panel Card Wrapper -->
+                    <div id="rightDynamicPanel" class="hidden bg-white border border-slate-200/80 p-5 rounded-3xl mx-auto lg:mx-0 shadow-2xl shadow-slate-200/50 flex flex-col justify-start w-full">
+                        
+                        <!-- FLOW STATE 2: SHARE OPTIONS (Now safely targets right-side display room) -->
+                        <div id="shareState" class="space-y-5 hidden my-auto w-full">
+                            <div class="space-y-1 text-left">
+                                <div class="flex items-center justify-between">
+                                    <span id="hostLabelRole" class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Meeting Host</span>
+                                    <span class="text-[10px] bg-indigo-50 text-indigo-600 border border-indigo-100 px-2 py-0.5 rounded-md font-mono font-bold flex items-center gap-1">
+                                        <i data-lucide="shield-check" class="w-3 h-3"></i>READY
+                                    </span>
+                                </div>
+                                <div class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-xs text-slate-700 flex items-center gap-2" id="lockedNameDisplay">
+                                    <i data-lucide="terminal" class="w-3.5 h-3.5 text-indigo-600"></i> mohit
+                                </div>
+                            </div>
+
+                            <div class="relative flex py-1 items-center w-full">
+                                <div class="flex-grow border-t border-slate-200"></div>
+                                <span class="flex-shrink mx-3 text-[9px] font-bold text-slate-400 uppercase tracking-widest">Share with others</span>
+                                <div class="flex-grow border-t border-slate-200"></div>
+                            </div>
+
+                            <div class="space-y-2 text-left w-full">
+                                <label class="block text-[10px] font-bold tracking-widest text-slate-400 uppercase">Invite Link</label>
+                                <div class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-3 text-xs">
+                                    <span id="displayInviteUrl" class="text-slate-500 font-mono tracking-tight truncate pl-1.5">https://infymeet.live/room/efa47d9b...</span>
+                                    <div class="flex items-center gap-1 shrink-0">
+                                        <button id="copyLinkBtn" class="text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1.5 rounded-lg transition-colors font-bold flex items-center gap-1">
+                                            <i data-lucide="copy" class="w-3 h-3"></i>Copy
+                                        </button>
+                                        <button id="shareDrawBtn" class="text-amber-600 hover:text-amber-700 bg-amber-50 hover:bg-amber-100 px-2.5 py-1.5 rounded-lg transition-colors font-bold flex items-center gap-1">
+                                            <i data-lucide="share-2" class="w-3 h-3"></i>Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="testTabBtn" class="w-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm min-h-[42px]">
+                                <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                                <span>Open in a new tab to test</span>
+                            </button>
+
+                            <button id="joinActiveCallBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-emerald-600/10 min-h-[44px]">
+                                <i data-lucide="video" class="w-4 h-4"></i>
+                                <span>Join This Meeting</span>
+                            </button>
+                        </div>
+
+                        <!-- FLOW STATE 3: CONTACT UTILITY -->
+                        <div id="contactShareState" class="space-y-4 hidden flex-col justify-between h-full w-full">
+                            <div class="space-y-4 w-full">
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-200 w-full">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="p-1.5 bg-indigo-50 border border-indigo-100 rounded-lg text-indigo-600">
+                                            <i data-lucide="send" class="w-4 h-4"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h3 class="font-bold text-sm text-slate-900 leading-tight">Share meeting link</h3>
+                                            <p class="text-[10px] text-slate-400 font-medium">Choose recipients for this invitation</p>
+                                        </div>
+                                    </div>
+                                    <button id="closeContactBtn" class="text-slate-400 hover:text-slate-600 transition-colors">
+                                        <i data-lucide="x" class="w-4.5 h-4.5"></i>
+                                    </button>
+                                </div>
+
+                                <div class="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-white shadow-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 font-extrabold text-xs flex items-center justify-center">P</div>
+                                        <h4 class="font-bold text-xs text-slate-800">Pramila Devi</h4>
+                                    </div>
+                                    <span class="text-[10px] bg-blue-600 text-white font-mono font-bold tracking-wide px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm">
+                                        <i data-lucide="ticket" class="w-3 h-3"></i> 032026/177202
+                                    </span>
+                                </div>
+
+                                <div class="space-y-1.5 text-left w-full">
+                                    <span class="block text-[10px] font-bold tracking-wider text-slate-400 uppercase pl-1 select-none">Customer Contacts</span>
+
+                                    <div class="max-h-[140px] overflow-y-auto pr-1 custom-scrollbar border border-slate-200 rounded-xl bg-white shadow-sm w-full">
+                                        <table class="w-full text-left border-collapse" style="font-family: inherit;">
+                                            <thead>
+                                                <tr class="bg-slate-50 border-b border-slate-200 text-[9px] font-bold uppercase tracking-wider text-slate-400 select-none whitespace-nowrap">
+                                                    <th class="py-2 px-3 w-12 text-center" style="font-family: inherit; white-space: nowrap;">Select</th>
+                                                    <th class="py-2 px-3 w-20">Contact Type</th>
+                                                    <th class="py-2 px-3 w-20">Info</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-slate-100 text-xs text-slate-700 whitespace-nowrap">
+                                                <tr class="hover:bg-slate-50/80 transition-colors group">
+                                                    <td class="py-2.5 px-3 text-center">
+                                                        <input type="checkbox" name="dispatchOption" value="Primary Email" checked class="w-4 h-4 rounded border-slate-300 bg-slate-50 text-indigo-600 focus:ring-0 focus:ring-offset-0 cursor-pointer transition-all">
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <div class="flex flex-col leading-tight"><span class="font-bold text-slate-800 text-[11px]">Primary email</span></div>
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <span class="text-[10px] text-slate-600 font-semibold tracking-tight">cintunmarik@gmail.com</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-slate-50/80 transition-colors group">
+                                                    <td class="py-2.5 px-3 text-center">
+                                                        <input type="checkbox" name="dispatchOption" value="Alternate Email" class="w-4 h-4 rounded border-slate-300 bg-slate-50 text-indigo-600 focus:ring-0 focus:ring-offset-0 cursor-pointer transition-all">
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <div class="flex flex-col leading-tight"><span class="font-bold text-slate-800 text-[11px]">Alternate email</span></div>
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <span class="text-[10px] text-slate-600 font-semibold tracking-tight">abcd@gmail.com</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-slate-50/80 transition-colors group">
+                                                    <td class="py-2.5 px-3 text-center">
+                                                        <input type="checkbox" name="dispatchOption" value="Mobile Number" class="w-4 h-4 rounded border-slate-300 bg-slate-50 text-indigo-600 focus:ring-0 focus:ring-offset-0 cursor-pointer transition-all">
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <div class="flex flex-col leading-tight"><span class="font-bold text-slate-800 text-[11px]">Mobile number</span></div>
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <span class="text-[10px] text-slate-600 font-semibold tracking-tight">6202995978</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hover:bg-slate-50/80 transition-colors group">
+                                                    <td class="py-2.5 px-3 text-center">
+                                                        <input type="checkbox" name="dispatchOption" value="WhatsApp" class="w-4 h-4 rounded border-slate-300 bg-slate-50 text-indigo-600 focus:ring-0 focus:ring-offset-0 cursor-pointer transition-all">
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <div class="flex flex-col leading-tight"><span class="font-bold text-slate-800 text-[11px]">WhatsApp</span></div>
+                                                    </td>
+                                                    <td class="py-2.5 px-3">
+                                                        <span class="text-[10px] text-slate-600 font-semibold tracking-tight">Active link</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative flex py-0.5 items-center w-full">
+                                <div class="flex-grow border-t border-slate-200"></div>
+                                <span class="flex-shrink mx-3 text-[9px] font-bold text-slate-400 uppercase tracking-wider select-none">or add external recipient</span>
+                                <div class="flex-grow border-t border-slate-200"></div>
+                            </div>
+
+                            <div class="space-y-1.5 text-left w-full">
+                                <div class="flex items-center justify-between pr-1 select-none w-full">
+                                    <span class="block text-[10px] font-bold tracking-wider text-slate-400 uppercase">External Recipients</span>
+                                </div>
+                                <p class="text-[9px] text-slate-400 -mt-1 select-none">Add email or mobile recipients</p>
+                                <div class="grid grid-cols-2 gap-2.5 w-full">
+                                    <div class="space-y-1">
+                                        <label class="block text-[9px] font-medium text-slate-500 select-none">Email address</label>
+                                        <input type="text" id="extEmail" placeholder="name@domain.com" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 font-medium text-xs text-slate-800 placeholder-slate-300 shadow-sm" />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="block text-[9px] font-medium text-slate-500 select-none">Mobile number</label>
+                                        <input type="text" id="extPhone" placeholder="9876543210" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 font-medium text-xs text-slate-800 placeholder-slate-300 shadow-sm" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-full px-3 py-2 bg-blue-50 border border-blue-100 rounded-xl flex items-center gap-2 text-xs font-semibold text-blue-600 text-left select-none shadow-sm">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-500 shrink-0"></i>
+                                <span id="bannerStatus">Ready to dispatch</span>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs select-none w-full">
+                                <span id="recipientStatus" class="text-slate-400 font-bold text-[10px] font-mono">1 selected</span>
+                                <div class="flex items-center gap-2">
+                                    <button id="cancelContactBtn" class="px-4 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl font-bold text-slate-600 transition-colors">Cancel</button>
+                                    <button id="sendLinkBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-md shadow-blue-600/10">
+                                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                        <span>Send link</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-200/80 bg-white py-12 relative z-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <div class="h-6 w-6 rounded-md bg-brand-500 flex items-center justify-center">
+                    <i data-lucide="video" class="w-3.5 h-3.5 text-white"></i>
+                </div>
+                <span class="text-sm font-semibold tracking-tight text-slate-900">InfyMeet</span>
+            </div>
+            <p class="text-xs text-slate-400 font-mono">© 2026 InfyMeet Inc. Clean semantic layout architecture.</p>
+        </div>
+    </footer>
+
+    <script>
+        // App Core State
+        let meetingMode = 'NEW'; // 'NEW' or 'JOIN'
+        let structuralRoomToken = 'efa47d9b-4ecb-46cb-8cfd-1481b47ff0ad';
+        
+        // Initializing Lucide Graphics Engine
+        lucide.createIcons();
+
+        // DOM Element Cache Map
+        const viewSetup = document.getElementById('setupState');
+        const viewShare = document.getElementById('shareState');
+        const viewContacts = document.getElementById('contactShareState');
+        
+        // Layout Toggle References
+        const previewCardSection = document.getElementById('previewCardSection');
+        const rightDynamicPanel = document.getElementById('rightDynamicPanel');
+        const leftSuccessMessage = document.getElementById('leftSuccessMessage');
+
+        const tabNewCall = document.getElementById('tabNewCall');
+        const tabJoinCall = document.getElementById('tabJoinCall');
+        const inputLabel = document.getElementById('inputLabel');
+        const inputIcon = document.getElementById('inputIcon');
+        const userNameInput = document.getElementById('userNameInput');
+        const primaryActionBtn = document.getElementById('primaryActionBtn');
+        const primaryActionText = document.getElementById('primaryActionText');
+        
+        const lockedNameDisplay = document.getElementById('lockedNameDisplay');
+        const hostLabelRole = document.getElementById('hostLabelRole');
+        const displayInviteUrl = document.getElementById('displayInviteUrl');
+        const previewRoomUrl = document.getElementById('previewRoomUrl');
+        
+        const extEmail = document.getElementById('extEmail');
+        const extPhone = document.getElementById('extPhone');
+        const sendLinkBtn = document.getElementById('sendLinkBtn');
+        const recipientStatus = document.getElementById('recipientStatus');
+        const bannerStatus = document.getElementById('bannerStatus');
+
+        // Layout Tab Switching Mechanism
+        tabNewCall.addEventListener('click', () => toggleSetupMode('NEW'));
+        tabJoinCall.addEventListener('click', () => toggleSetupMode('JOIN'));
+
+        function toggleSetupMode(mode) {
+            meetingMode = mode;
+            if (mode === 'NEW') {
+                tabNewCall.className = "flex-1 bg-white text-slate-900 border border-slate-200/80 shadow-sm py-2 rounded-lg transition-all flex items-center justify-center gap-1.5";
+                tabJoinCall.className = "flex-1 hover:text-slate-700 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5";
+                inputLabel.innerText = "YOUR NAME";
+                userNameInput.placeholder = "Enter your display name...";
+                primaryActionText.innerText = "Create Video Meeting";
+                
+                // Re-render user icon inside input
+                inputIcon.setAttribute('data-lucide', 'user');
+            } else {
+                tabJoinCall.className = "flex-1 bg-white text-slate-900 border border-slate-200/80 shadow-sm py-2 rounded-lg transition-all flex items-center justify-center gap-1.5";
+                tabNewCall.className = "flex-1 hover:text-slate-700 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5";
+                inputLabel.innerText = "MEETING ROOM ID / LINK";
+                userNameInput.placeholder = "Enter room ID or paste link here...";
+                primaryActionText.innerText = "Connect to Room";
+                
+                // Re-render hash/key icon inside input
+                inputIcon.setAttribute('data-lucide', 'key-round');
+            }
+            lucide.createIcons();
+        }
+
+        // Primary Action Submissions
+        primaryActionBtn.addEventListener('click', () => {
+            const rawInputValue = userNameInput.value.trim();
+            
+            if (meetingMode === 'NEW') {
+                const finalHostName = rawInputValue || "mohit";
+                structuralRoomToken = 'room-' + Math.random().toString(36).substring(2, 10);
+                
+                lockedNameDisplay.innerHTML = `<i data-lucide="terminal" class="w-3.5 h-3.5 text-indigo-600"></i> ${finalHostName}`;
+                hostLabelRole.innerText = "MEETING HOST";
+            } else {
+                if (rawInputValue.includes('room/')) {
+                    structuralRoomToken = rawInputValue.split('room/')[1];
+                } else if(rawInputValue) {
+                    structuralRoomToken = rawInputValue;
+                } else {
+                    structuralRoomToken = 'alpha-room-node';
+                }
+                lockedNameDisplay.innerHTML = `<i data-lucide="link" class="w-3.5 h-3.5 text-indigo-600"></i> Active Node Target`;
+                hostLabelRole.innerText = "TARGET ROOM ID";
+            }
+
+            // Sync dynamic url parameters throughout application layout
+            const computedTargetUrl = `https://infymeet.live/room/${structuralRoomToken}`;
+            displayInviteUrl.innerText = computedTargetUrl;
+            previewRoomUrl.innerText = `infymeet.live/${structuralRoomToken.substring(0, 14)}...`;
+
+            // Transition Steps:
+            // 1. Hide input configuration panel layout on the left, show success statement description
+            viewSetup.classList.add('hidden');
+            leftSuccessMessage.classList.remove('hidden');
+
+            // 2. Hide Video Preview Card Section on the right, open Management Host Panel Card
+            previewCardSection.classList.add('hidden');
+            rightDynamicPanel.classList.remove('hidden');
+            viewShare.classList.remove('hidden');
+            
+            lucide.createIcons();
+        });
+
+        // Share State Click Targets
+        document.getElementById('copyLinkBtn').addEventListener('click', () => {
+            const URL_TARGET = `https://infymeet.live/room/${structuralRoomToken}`;
+            navigator.clipboard.writeText(URL_TARGET);
+            alert("Invite link copied to your clipboard.");
+        });
+
+        document.getElementById('shareDrawBtn').addEventListener('click', () => {
+            viewShare.classList.add('hidden');
+            viewContacts.classList.remove('hidden');
+            viewContacts.classList.add('flex');
+            calculateRecipientMetrics();
+        });
+
+        document.getElementById('testTabBtn').addEventListener('click', () => {
+            window.open(`http://localhost:3000/?roomId=${structuralRoomToken}`, '_blank');
+        });
+
+        document.getElementById('joinActiveCallBtn').addEventListener('click', () => {
+            alert(`Initializing WebRTC stream adapter. Attaching into room identity token: [${structuralRoomToken}]`);
+        });
+
+        // Navigation Backups
+        function revertToSharePanel() {
+            viewContacts.classList.add('hidden');
+            viewContacts.classList.remove('flex');
+            viewShare.classList.remove('hidden');
+        }
+        document.getElementById('closeContactBtn').addEventListener('click', revertToSharePanel);
+        document.getElementById('cancelContactBtn').addEventListener('click', revertToSharePanel);
+
+        // Contact Selection Matrix Validation Engine
+        function calculateRecipientMetrics() {
+            const targetedCheckboxes = document.querySelectorAll('#contactShareState input[type="checkbox"]:checked');
+            const emailString = extEmail.value.trim();
+            const phoneString = extPhone.value.trim();
+
+            let aggregateTotal = targetedCheckboxes.length;
+            if (emailString.includes('@') && emailString.includes('.')) aggregateTotal++;
+            if (phoneString.length >= 8) aggregateTotal++;
+
+            recipientStatus.innerText = `${aggregateTotal} selected`;
+            bannerStatus.innerText = `Sending to ${aggregateTotal} recipient${aggregateTotal === 1 ? '' : 's'}`;
+
+            if (aggregateTotal > 0) {
+                sendLinkBtn.disabled = false;
+                sendLinkBtn.className = "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-md shadow-blue-600/10";
+            } else {
+                sendLinkBtn.disabled = true;
+                sendLinkBtn.className = "px-4 py-2 bg-blue-400 text-white font-bold rounded-xl flex items-center gap-1.5 cursor-not-allowed opacity-60 transition-all";
+            }
+        }
+
+        // Mutation Event Listeners
+        document.querySelectorAll('#contactShareState input[type="checkbox"]').forEach(box => {
+            box.addEventListener('change', calculateRecipientMetrics);
+        });
+        extEmail.addEventListener('input', calculateRecipientMetrics);
+        extPhone.addEventListener('input', calculateRecipientMetrics);
+
+        // Transmit Dispatches Lifecycle Finished
+        sendLinkBtn.addEventListener('click', () => {
+            alert("Invitations dispatched successfully via system hooks!");
+            revertToSharePanel();
+        });
+    </script>
+</body>
+
+</html>
